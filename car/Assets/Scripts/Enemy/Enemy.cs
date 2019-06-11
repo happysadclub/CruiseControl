@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     {
 
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = movementSpeed;
     }
     
     // Update is called once per frame
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
 
         // Move our position a step closer to the target.
         transform.rotation = Quaternion.LookRotation(newDir);
+        
 
         //finds distance between the two
         float distance = Vector3.Distance(player.transform.position, transform.position);
