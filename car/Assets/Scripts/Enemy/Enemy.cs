@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.Find("Player_Car");
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
     }
