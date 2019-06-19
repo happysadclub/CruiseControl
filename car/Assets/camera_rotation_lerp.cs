@@ -54,7 +54,7 @@ public class camera_rotation_lerp : MonoBehaviour
 
         //perform lerp
         Quaternion target_rotation = Quaternion.Euler(target_rotation_vector);
-        print(target_rotation_vector);
+        //print(target_rotation_vector);
         target_rotation = Quaternion.Lerp(this.transform.localRotation, target_rotation, rotation_lerp_speed);
         this.transform.localRotation = target_rotation;
     }
