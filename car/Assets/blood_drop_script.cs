@@ -28,7 +28,7 @@ public class blood_drop_script : MonoBehaviour
         int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
         int i = 0;
 
-        print(numCollisionEvents);
+        //print(numCollisionEvents);
 
         while (i < numCollisionEvents)
         {

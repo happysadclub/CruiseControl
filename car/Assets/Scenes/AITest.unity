@@ -1421,6 +1421,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraHolder
       objectReference: {fileID: 0}
+    - target: {fileID: 114545414204086630, guid: a50946a825294aa4aa6a74f87c63853a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114872122345462970, guid: a50946a825294aa4aa6a74f87c63853a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114708590657069850, guid: a50946a825294aa4aa6a74f87c63853a,
+        type: 3}
+      propertyPath: original_FOV
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 20541979172505670, guid: a50946a825294aa4aa6a74f87c63853a,
+        type: 3}
+      propertyPath: field of view
+      value: 110
+      objectReference: {fileID: 0}
     - target: {fileID: 4620064693019692, guid: a50946a825294aa4aa6a74f87c63853a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 70.2952
@@ -1479,6 +1499,11 @@ PrefabInstance:
         type: 3}
       propertyPath: offset.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114650764779281882, guid: a50946a825294aa4aa6a74f87c63853a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a50946a825294aa4aa6a74f87c63853a, type: 3}

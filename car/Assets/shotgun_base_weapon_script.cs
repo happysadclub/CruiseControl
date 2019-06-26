@@ -5,47 +5,52 @@ using EZCameraShake;
 
 public class shotgun_base_weapon_script : MonoBehaviour
 {
+
+    //Main Shotgun Components
+
+    public KeyCode interact_key = KeyCode.Mouse0;
+
+    [Header("Components")]
     public GameObject projectile_object;
     public ParticleSystem projectile_particle_system;
     public Transform projectile_spawnpoint;
-    public float projectile_speed = 150f;
-    public int projectile_count = 5;
-    public float spread_factor = 0.01f;
-    public float fire_rate = 0.5f;
-    public float charged_fire_rate = 0.05f;
-    public float charge_rate = 0.1f;
-    public int max_charge = 8;
-    List<Quaternion> projectile_list;
-    List<Quaternion> charged_projectile_list;
 
+    [Header("Parameters")]
+    public float projectile_speed = 3500f;
+    public int projectile_count = 10;
+    public float spread_factor = 13f;
+    public float fire_rate = 1f;
+    public float charged_fire_rate = 0.1f;
+    public float charge_rate = 0.3f;
+    public int max_charge = 8;
+
+    //Private Shotun Components
+
+    private List<Quaternion> projectile_list;
+    private List<Quaternion> charged_projectile_list;
     private float next_fire = 0.0f;
     private float next_charge = 0.0f;
     private int charged_num = 1;
     private bool charged = false;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
-        //instantiate projectiles
-        projectile_list = new List<Quaternion>(projectile_count);
-        for (int i = 0; i < projectile_count; i++)
-        {
-            projectile_list.Add(Quaternion.Euler(Vector3.zero));
-        }
-
-        //instantiate charged projectiles
-        charged_projectile_list = new List<Quaternion>(projectile_count * 2);
-        for (int i = 0; i < projectile_count * 2; i++)
-        {
-            charged_projectile_list.Add(Quaternion.Euler(Vector3.zero));
-        }
+        //instantiate projectile list
+        instantiate_projectile_lists();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //if the input is clicked and you're not on cooldown
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time > next_fire && !charged)
+        check_for_input();
+    }
+
+    //checks for player input
+    private void check_for_input()
+    {
+        //if input is pressed and you're not on cooldown
+        if (Input.GetKeyDown(interact_key) && Time.time > next_fire && !charged)
         {
             //fire projectiles
             fire_projectiles();
@@ -60,21 +65,21 @@ public class shotgun_base_weapon_script : MonoBehaviour
             next_fire = Time.time + fire_rate;
         }
 
-        //if key is released and shotgun has charge
-        if (Input.GetKeyUp(KeyCode.Mouse0) && charged)
+        //if input is released and shotgun has charge
+        if (Input.GetKeyUp(interact_key) && charged)
         {
             StartCoroutine(fire_charged_projectiles());
         }
 
-        //if the input is held down and you're not on cooldown
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time > next_fire)
+        //if the input is held and you're not on cooldown
+        if (Input.GetKey(interact_key) && Time.time > next_fire)
         {
             //start charging up shots
             if (Time.time > next_charge && charged_num <= max_charge)
             {
                 //set charged bool
                 charged = true;
-                
+
                 //add a charge
                 charged_num += 1;
                 print(charged_num);
@@ -86,8 +91,9 @@ public class shotgun_base_weapon_script : MonoBehaviour
     }
 
     //handles firing all shotgun projectiles
-    void fire_projectiles()
+    private void fire_projectiles()
     {
+        //if shotgun is charged - fire carged shots from charged projectile list
         if (charged)
         {
             int i = 0;
@@ -99,6 +105,7 @@ public class shotgun_base_weapon_script : MonoBehaviour
                 projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.right * projectile_speed);
             }
         }
+        //if shotgun is not charged - fire normal shots from projectile list
         else
         {
             int i = 0;
@@ -112,7 +119,24 @@ public class shotgun_base_weapon_script : MonoBehaviour
         }
     }
 
-    IEnumerator fire_charged_projectiles()
+    //instantiates both the normal and charged projectile list
+    private void instantiate_projectile_lists()
+    {
+        projectile_list = new List<Quaternion>(projectile_count);
+        for (int i = 0; i < projectile_count; i++)
+        {
+            projectile_list.Add(Quaternion.Euler(Vector3.zero));
+        }
+
+        //instantiate charged projectile list
+        charged_projectile_list = new List<Quaternion>(projectile_count * 2);
+        for (int i = 0; i < projectile_count * 2; i++)
+        {
+            charged_projectile_list.Add(Quaternion.Euler(Vector3.zero));
+        }
+    }
+
+    private IEnumerator fire_charged_projectiles()
     {
         //set charged spread
         spread_factor = spread_factor * 2f;
