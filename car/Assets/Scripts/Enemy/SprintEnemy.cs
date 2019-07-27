@@ -9,12 +9,14 @@ public class SprintEnemy : Enemy
     public float tooCloseToSprint;
     
     public float yeetForce;
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player_Car");
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        enemyManager = GameObject.Find("EnemyManager");
     }
 
     // Update is called once per frame

@@ -6,12 +6,14 @@ using UnityEngine.AI;
 public class SplodeyBoi : Enemy
 {
     public bool readyToPop;
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player_Car");
         agent = GetComponent<NavMeshAgent>();
         readyToPop = false;
+        enemyManager = GameObject.Find("EnemyManager");
     }
 
     // Update is called once per frame

@@ -11,6 +11,7 @@ public class Ranged : Enemy
     public float shotCooldown;
     float lastShotTime = 0f;
     public float bulletForce;
+    public int damage;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class Ranged : Enemy
         player = GameObject.Find("Player_Car");
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        enemyManager = GameObject.Find("EnemyManager");
     }
 
     // Update is called once per frame
@@ -91,6 +93,7 @@ public class Ranged : Enemy
     {
         GameObject currentBullet = Instantiate(bullet, transform.position, transform.rotation);
         currentBullet.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * bulletForce);
+        currentBullet.GetComponent<Bullet>().damage = damage;
         Debug.Log("Shoot");
     }
 

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4152332120139653820}
   m_Layer: 0
   m_Name: LaserBoi
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,9 +153,11 @@ MonoBehaviour:
   player: {fileID: 0}
   agent: {fileID: 0}
   rb: {fileID: 0}
+  enemyManager: {fileID: 0}
   isLasering: 0
   laserRotationSpeed: 5
   laserRange: 250
   bullet: {fileID: 766127508034518789, guid: b851b6a224241f342b097f30ff2b238e, type: 3}
   shotCooldown: 0.2
   bulletForce: 10000
+  damage: 10

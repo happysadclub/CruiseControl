@@ -19577,6 +19577,7 @@ GameObject:
   - component: {fileID: 82318733736203174}
   - component: {fileID: 120975832017210596}
   - component: {fileID: 114412570357951956}
+  - component: {fileID: 4025917505112325057}
   m_Layer: 0
   m_Name: Player_Car
   m_TagString: Player
@@ -19990,6 +19991,19 @@ MonoBehaviour:
   stretchSound: {fileID: 8300000, guid: f17fb7f2692f4e849a6bfbbfd7865b51, type: 3}
   snapClip: {fileID: 8300000, guid: 119cee4f37685414b932294f1d0e69f0, type: 3}
   sound_interpolationPeriod: 0.1
+--- !u!114 &4025917505112325057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181626616771622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e233db189c8b054083f3cef4380bce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 500
 --- !u!1 &1184675339915108
 GameObject:
   m_ObjectHideFlags: 0

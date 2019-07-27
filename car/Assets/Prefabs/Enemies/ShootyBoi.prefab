@@ -14,11 +14,10 @@ GameObject:
   - component: {fileID: 4762898886650321510}
   - component: {fileID: 8506949119087151036}
   - component: {fileID: 7362231035131111127}
-  - component: {fileID: 2548831141911333211}
   - component: {fileID: 8049637402215343022}
   m_Layer: 0
   m_Name: ShootyBoi
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,29 +133,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2548831141911333211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 610271597714802139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d6aee954eb404c47a980f7c1e34c547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 25.39
-  aggroRange: 116.55
-  movementSpeed: 0
-  fireRate: 0
-  turnSpeed: 3
-  player: {fileID: 0}
-  agent: {fileID: 0}
-  rb: {fileID: 0}
-  sprintRange: 84.93
-  tooCloseToSprint: 63.35
-  yeetForce: 1000
 --- !u!114 &8049637402215343022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,16 +145,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a89dab450287fa45865737bfa0fcf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 25.39
-  aggroRange: 0
-  movementSpeed: 0
-  fireRate: 0
-  turnSpeed: 0
+  attackRange: 100
+  aggroRange: 125
+  movementSpeed: 45
+  fireRate: 5
+  turnSpeed: 10
   player: {fileID: 0}
   agent: {fileID: 0}
   rb: {fileID: 0}
-  disengageRange: 0
-  yeetAwayForce: 0
-  bullet: {fileID: 0}
-  shotCooldown: 0
-  bulletForce: 0
+  enemyManager: {fileID: 0}
+  disengageRange: 40
+  yeetAwayForce: 500
+  bullet: {fileID: 766127508034518789, guid: b851b6a224241f342b097f30ff2b238e, type: 3}
+  shotCooldown: 1
+  bulletForce: 10000
+  damage: 10
