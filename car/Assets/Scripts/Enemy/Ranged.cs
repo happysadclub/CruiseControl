@@ -12,6 +12,7 @@ public class Ranged : Enemy
     float lastShotTime = 0f;
     public float bulletForce;
     public int damage;
+    public float fleeSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,7 @@ public class Ranged : Enemy
             
             else
             {
+                agent.speed = movementSpeed;
                 agent.SetDestination(player.transform.position);
             }
 
@@ -83,8 +85,8 @@ public class Ranged : Enemy
         }
         if (distance <= disengageRange)
         {
-
-            rb.AddForce(-transform.forward * yeetAwayForce);
+            agent.speed = fleeSpeed;
+            agent.SetDestination(-player.transform.position);
         }
 
     }

@@ -7,11 +7,13 @@ public class Laser : Enemy
     public bool isLasering;
     public float laserRotationSpeed;
     public float laserRange;
-    public GameObject bullet;
     public float shotCooldown;
     float lastShotTime = 0f;
     public float bulletForce;
     public int damage;
+    public GameObject laserStart;
+    LineRenderer lineRender;
+    public float laserLength;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,8 @@ public class Laser : Enemy
         rb = GetComponent<Rigidbody>();
         isLasering = false;
         enemyManager = GameObject.Find("EnemyManager");
+        lineRender = laserStart.GetComponent<LineRenderer>();
+
     }
 
     // Update is called once per frame
@@ -26,17 +30,21 @@ public class Laser : Enemy
     {
         if (isLasering)
         {
+            
             Vector3 targetDir = player.transform.position - transform.position;
             float step = laserRotationSpeed * Time.deltaTime;
 
             Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0f);
             Debug.DrawRay(transform.position, newDir, Color.red);
 
+            lineRender.SetWidth(2f, 2f);
+            lineRender.SetPosition(0, gameObject.transform.position);
+            lineRender.SetPosition(1, gameObject.transform.position + transform.forward * laserLength);
+            
             // Move our position a step closer to the target.
             transform.rotation = Quaternion.LookRotation(newDir);
             if ((Time.time - lastShotTime) > shotCooldown)
             {
-                Shoot();
                 lastShotTime = Time.time;
             }
             
@@ -53,6 +61,7 @@ public class Laser : Enemy
         if (distance <= aggroRange && distance >= attackRange)
         {
             isLasering = false;
+            lineRender.SetWidth(0f, 0f);
             Vector3 targetDir = player.transform.position - transform.position;
 
             // The step size is equal to speed times frame time.
@@ -85,11 +94,5 @@ public class Laser : Enemy
         }
         
 
-    }
-    public void Shoot()
-    {
-        GameObject currentBullet = Instantiate(bullet, transform.position, transform.rotation);
-        currentBullet.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * bulletForce);
-        currentBullet.GetComponent<Bullet>().damage = damage;
     }
 }

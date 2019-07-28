@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public int health = 100;
+    public float lastHit = 0;
+    public float iFrameTime;
+    public int sprinterDamage;
+    public int explodingDamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,11 +18,15 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(health);
     }
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        if(iFrameTime < Time.time - lastHit)
+        {
+            health -= damage;
+            lastHit = Time.time;
+        }
+        
     }
     public void Heal(int healing)
     {
@@ -29,9 +37,22 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("SomethinmgHit");
         if(collision.gameObject.tag == "enemyBullet")
         {
-            Debug.Log("Been Shot");
-            TakeDamage(collision.gameObject.GetComponent<Bullet>().damage);
-            Destroy(collision.gameObject);
+            if (iFrameTime < Time.time - lastHit)
+            {
+                Debug.Log("Been Shot");
+                TakeDamage(collision.gameObject.GetComponent<Bullet>().damage);
+                Destroy(collision.gameObject);
+                lastHit = Time.time;
+            }
+        }
+        if (collision.gameObject.tag == "sprinterEnemy")
+        {
+            if (iFrameTime < Time.time - lastHit)
+            {
+                Debug.Log("Been Sprinted At");
+                TakeDamage(sprinterDamage);
+                lastHit = Time.time;
+            }
         }
     }
 }

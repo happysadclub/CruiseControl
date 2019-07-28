@@ -7,9 +7,10 @@ public class SprintEnemy : Enemy
 {
     public float sprintRange;
     public float tooCloseToSprint;
-    
-    public float yeetForce;
+    public float normalSpeed;
+    public float yeetSpeed;
     public int damage;
+    public float sprintDistance;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,13 +49,16 @@ public class SprintEnemy : Enemy
             //over range of time so not jittery
            
 
-            if(distance<sprintRange && distance > tooCloseToSprint)
+            if(distance<sprintRange)
             {
-                
-                rb.AddForce(transform.forward * yeetForce);
+                Vector3 target = gameObject.transform.position + gameObject.transform.forward * sprintDistance;
+                agent.speed = yeetSpeed;
+                agent.SetDestination(target);
+               
             }
             else
             {
+                agent.speed = normalSpeed;
                 agent.SetDestination(player.transform.position);
             }
         }
